@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=testemarina2
+PROJECTNAME=projeto2 - grafos
 
 # Active Configuration
 DEFAULTCONF=Debug
