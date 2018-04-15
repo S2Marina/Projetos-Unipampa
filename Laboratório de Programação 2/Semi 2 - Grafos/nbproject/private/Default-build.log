@@ -1,0 +1,2 @@
+gcc funcoes.c -c
+gcc main.c funcoes.o -o exec
