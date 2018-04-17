@@ -3,7 +3,6 @@
 #include "cabecalho.h"
 
 
-//portinho esteve aqui :)
 int main() {
   Grafo* g = NULL;
   int m = 0;

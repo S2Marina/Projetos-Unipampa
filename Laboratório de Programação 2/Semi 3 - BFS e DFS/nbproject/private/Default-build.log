@@ -1,0 +1,6 @@
+gcc funcao.c -c
+gcc: error: funcao.c: Arquivo ou diretório não encontrado
+gcc: fatal error: no input files
+compilation terminated.
+makefile:2: recipe for target 'index' failed
+make: *** [index] Error 1
