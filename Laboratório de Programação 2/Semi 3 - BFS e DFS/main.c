@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cabecalho.h"
+#include "grafo.h"
+#include "busca.h"
 
 int main() {
     Grafo* g = NULL;
@@ -22,12 +23,13 @@ int main() {
             case 2:
             {
                 imprimirGrafo(g);
+                g = lerArquivo();
                 break;
             }
             case 3:
             {
-                lista = dfs(g->listaNodos);
-                imprimirLista(lista);
+                dfs(g->listaNodos);
+                g = lerArquivo();
                 break;
             }
         }

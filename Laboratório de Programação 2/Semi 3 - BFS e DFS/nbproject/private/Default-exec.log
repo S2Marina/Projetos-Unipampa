@@ -1,6 +1,0 @@
-called: gcc
-	/home/marina/Documentos/Repositórios/Projetos-Unipampa/Laboratório de Programação 2/Semi 3 - BFS e DFS
-	gcc
-	funcao.c
-	-c
-

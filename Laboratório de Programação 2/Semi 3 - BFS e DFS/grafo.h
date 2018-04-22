@@ -18,17 +18,9 @@ struct grafo {
 };
 typedef struct grafo Grafo;
 
-struct listaNodos{
-    int chave;
-    struct listaNodos *prox;
-};typedef struct listaNodos Lista;
-
-
 Nodo* criaNodo();
 Aresta* criaAresta();
 Grafo* criaGrafo();
 Aresta* insereAresta(Nodo* n, int chave, int peso);
 Grafo* lerArquivo();
 void imprimirGrafo(Grafo* g);
-Lista* dfs(Nodo* nodo);
-void imprimirLista(Lista* lista);

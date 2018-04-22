@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cabecalho.h"
+#include "grafo.h"
 
 Nodo* criaNodo() {
     Nodo *n = (Nodo*) malloc(sizeof (Nodo));
@@ -105,29 +105,5 @@ void imprimirGrafo(Grafo* g) {
         printf("\n");
         nodo = nodo->prox;
     }
-}
-
-Lista* dfs(Nodo* nodo) {
-    Lista* visitados = (Lista*) malloc(sizeof (Lista));
-
-    while (nodo != NULL) {
-        visitados->chave = nodo->chave;
-        if (visitados == NULL) {
-            visitados->prox = NULL;
-        } else {
-            visitados->prox = visitados->prox->prox;
-        }
-
-        while (nodo->adj != NULL) {
-            visitados->prox = dfs(nodo);
-            nodo->adj = nodo->adj->prox;
-        }
-        nodo = nodo->prox;
-    }
-}
-void imprimirLista(Lista* lista) {
-    if (lista != NULL) {
-        printf("%i\n", lista->chave);
-        imprimirLista(lista->prox);
-    }
+    g = lerArquivo();
 }
