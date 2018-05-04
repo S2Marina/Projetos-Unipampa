@@ -20,7 +20,7 @@ typedef struct grafo Grafo;
 
 Nodo* criaNodo();
 Aresta* criaAresta();
-Grafo* criaGrafo();
-Aresta* insereAresta(Nodo* n, int chave, int peso);
+Grafo* criaGrafo(int tamanho);
+void insereAresta(Nodo* n, int chave, int peso);
 Grafo* lerArquivo();
 void imprimirGrafo(Grafo* g);

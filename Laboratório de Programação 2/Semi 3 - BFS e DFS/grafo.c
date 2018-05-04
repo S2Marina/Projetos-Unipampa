@@ -2,68 +2,57 @@
 #include <stdlib.h>
 #include "grafo.h"
 
-Nodo* criaNodo() {
+Nodo* criaNodo(int chave) {
     Nodo *n = (Nodo*) malloc(sizeof (Nodo));
-    n->chave = 0;
+    n->chave = chave;
     n->prox = NULL;
     n->adj = NULL;
+    return n;
 }
 
-Aresta* criaAresta() {
+Aresta* criaAresta(int chave, int peso) {
     Aresta* a = (Aresta*) malloc(sizeof (Aresta));
-    a->chave_adj = 0;
-    a->peso = 0;
+    a->chave_adj = chave;
+    a->peso = peso;
     a->prox = NULL;
+    return a;
 }
 
-Grafo* criaGrafo() {
-    FILE *arquivo;
-    int i, tamanho = 0;
-    Nodo * raiz;
-
-    if ((arquivo = fopen("entrada.txt", "r")) == NULL) {
-        printf("Impossivel realizar a leitura do arquivo. Tente novamente\n");
-    }
-    fscanf(arquivo, "%d", &tamanho);
+Grafo* criaGrafo(int tamanho) {
+    int i;
 
     Grafo *g = (Grafo*) malloc(sizeof (Grafo));
     g->tamanho = tamanho;
     g->listaNodos = NULL;
 
     for (i = 0; i < tamanho; i++) {
-        Nodo* novo = criaNodo();
+        Nodo* novo = criaNodo(i+1);
         if (g->listaNodos == NULL) {
             g->listaNodos = novo;
-            raiz = novo;
         } else {
-            while (g->listaNodos->prox != NULL) {
-                g->listaNodos = g->listaNodos->prox;
+            Nodo *temp = g->listaNodos; //preciso usar temp para não perder o ponteiro do primeiro
+            while (temp->prox != NULL) {
+                temp = temp->prox;
             }
-            g->listaNodos->prox = novo;
+            temp->prox = novo;
         }
     }
-
-    g->listaNodos = raiz;
     return g;
 }
 
-Aresta* insereAresta(Nodo* n, int chave, int peso) {
+void insereAresta(Nodo* n, int chave, int peso) {
     Aresta* a;
-    a = criaAresta();
+    a = criaAresta(chave, peso);
+    Aresta *temp = n->adj;
 
-    a->chave_adj = chave;
-    a->peso = peso;
-    a->prox = NULL;
-
-    while (n->adj != NULL) {
-        if (n->adj == NULL) {
-            n->adj = a;
-            return a;
+    if(temp == NULL){
+        n->adj = a;
+    }else{
+        while(temp->prox != NULL){
+            temp = temp->prox;
         }
-        n->adj = n->adj->prox;
+        temp->prox = a;
     }
-
-    return a;
 }
 
 Grafo* lerArquivo() {
@@ -73,20 +62,20 @@ Grafo* lerArquivo() {
     int a = 0;
     int peso = 0;
 
-    Grafo* g = NULL;
-    g = criaGrafo();
-    Nodo* nodo = g->listaNodos;
-
     if ((arquivo = fopen("entrada.txt", "r")) == NULL) {
         printf("Impossivel realizar a leitura do arquivo. Tente novamente\n");
     }
     fscanf(arquivo, "%d", &tamanho);
 
-    while (fscanf(arquivo, "%i;%i;%i", &chave, &a, &peso) != EOF) {
-        nodo->chave = chave;
-        nodo->adj = insereAresta(nodo, a, peso);
+    Grafo* g = NULL;
+    g = criaGrafo(tamanho);
 
-        nodo = nodo->prox;
+    while (fscanf(arquivo, "%i;%i;%i", &chave, &a, &peso) != EOF) {
+        Nodo* nodo = g->listaNodos;
+        while(nodo->chave != chave){
+            nodo = nodo->prox;
+        }
+        insereAresta(nodo, a, peso);
     }
     fclose(arquivo);
     return g;

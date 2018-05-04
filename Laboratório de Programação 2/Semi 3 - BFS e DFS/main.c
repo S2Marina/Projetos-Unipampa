@@ -9,7 +9,7 @@ int main() {
     int m = 0;
 
     do {
-        printf("\nMenu:\n 1-Criar Grafo\n 2-Imprimir grafo\n 3-DFS\n 0-Sair\nOpcao: ");
+        printf("\nMenu:\n 1-Criar Grafo\n 2-Imprimir grafo\n 3-DFS\n 4-BFS\n 0-Sair\nOpcao: ");
         scanf("%i", &m);
         switch (m) {
             case 1:
@@ -28,8 +28,12 @@ int main() {
             }
             case 3:
             {
-                dfs(g->listaNodos);
-                g = lerArquivo();
+                dfs(g);
+                break;
+            }
+            case 4:
+            {
+                bfs(g);
                 break;
             }
         }
