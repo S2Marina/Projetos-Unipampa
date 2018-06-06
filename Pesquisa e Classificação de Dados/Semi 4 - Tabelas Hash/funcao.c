@@ -15,7 +15,6 @@ void inicializa(void)
 }
 
 void criaTabela(void){
- //   Nodo** hash;
     Nodo* novo, *aux;
     int endereco=0, i=0, cont=0, igual=0, codigo;	
 		printf("Digite o código\n");
@@ -38,16 +37,16 @@ void criaTabela(void){
 		{
 		novo = malloc(sizeof(Nodo));
 			novo->codigo = codigo;
-			novo->valor=5.0;
-				strcpy(novo->desc, "o");
-					novo->prox = NULL;
-		    endereco = novo->codigo % TAM;
-			novo->prox = tabela[endereco];
-			tabela[endereco] = novo;
+			printf("Valor=");
+				scanf("%f", &novo->valor);
+			printf("Descricao:");
+				scanf("%s", novo->desc);
+				setbuf(stdin, NULL);
+			novo->prox = NULL;
+				endereco = novo->codigo % TAM;
+					novo->prox = tabela[endereco];
+						tabela[endereco] = novo;
 			 printf("Tabela criada com sucesso!!!\n");
-    //// Imprimir informacoes
-    //printf("Codigo: %d\tValor: %f\tEndereco: %d\n",
-        //novo->codigo, novo->valor, endereco);
 		}
 }
 
@@ -55,38 +54,34 @@ void imprime(void)
 {
 	int i, cont=0;
 	Nodo*aux;
-  for (i = 0; i < TAM; i++) {
-    cont = 0;
-    aux = tabela[i];
-    printf("%d) -> ", i);
-    while (aux != NULL) {
-      printf("|%d|%f|[%s] -> ", aux->codigo, 
-        aux->valor, aux->desc); 
-      aux = aux->prox;
-      cont++;
-    }
-    printf("NULL (%d)\n", cont);
-  } 
+		for (i = 0; i < TAM; i++)
+		{
+			cont = 0;
+				aux = tabela[i];
+					printf("ENDEREÇO[%d] -> ", i);
+			while (aux != NULL)
+		   {
+			printf("CODIGO=%d\tVALOR=%0.2f\tDESCRICAO:%s -> ", aux->codigo, aux->valor, aux->desc); 
+				aux = aux->prox;
+					cont++;
+			}
+		printf("NULL (%d)\n", cont);
+		} 
 }
 
 void busca(int valor)
 {
- int x;
- x = valor * TAM;
- Nodo *tab = tabela[x];
+ int endereco;
+ endereco = valor % TAM;
+ Nodo *tab = tabela[endereco];
  int cont=0;
- /* procura item com info = x */
-	while (tab != NULL)
-	{
-		if (valor == tab[x].codigo)
+		if (valor == tab->codigo)
 		{
 			 printf("codigo=%d\tvalor=%2.f\tdescricao=%s\n", tab->codigo, tab->valor, tab->desc);
 		cont++;
 		}
-		tab=tab->prox;
-	}
-	if(cont==0)
-	{
+		if(cont==0)
+		{
 		printf("Codigo nao existente na tabela!\n");
 		}
 }

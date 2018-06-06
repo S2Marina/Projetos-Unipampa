@@ -5,7 +5,7 @@ struct nodo {
   struct nodo *prox;
 };
 typedef struct nodo Nodo;
-#define TAM 5
+#define TAM 51
 Nodo *tabela[TAM];
 void inicializa(void);
 void criaTabela(void);
