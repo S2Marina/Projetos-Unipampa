@@ -95,5 +95,5 @@ void imprimirGrafo(Grafo* g) {
         printf("\n");
         nodo = nodo->prox;
     }
-    g = lerArquivo();
+    //g = lerArquivo();
 }

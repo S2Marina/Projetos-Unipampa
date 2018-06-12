@@ -17,3 +17,7 @@ Aresta **  percolate(Aresta** heap, int tamanho);
 
 //retorna o maior da heap
 Aresta* getRaiz(Aresta** heap);
+
+//retorna numero de elementos da heap
+int getTamanho(Aresta **heap);
+
