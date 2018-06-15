@@ -4,6 +4,7 @@
 #include "heap.h"
 #include "conjuntos.h"
 #include "kruskal.h"
+#include "prim.h"
 
 int main() {
     Grafo* g = NULL;
@@ -29,6 +30,7 @@ int main() {
                 break;
             }
             case 3:{
+                prim(g);
                 break;
             }
         }

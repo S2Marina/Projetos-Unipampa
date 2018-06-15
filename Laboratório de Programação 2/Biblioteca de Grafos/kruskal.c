@@ -27,15 +27,15 @@ void kruskal(Grafo* g) {
     int* conjuntos;
     int tamanhoGrafo = g->tamanho;
     int tamanhoSolucao = 0;
-    int tamanho = 0, u = 0, v = 0, i = 0, parar = 0;
+    int tamanhoHeap = 0, u = 0, v = 0, i = 0, parar = 0;
 
     //cria conjuntos 
     conjuntos = makeSet(tamanhoGrafo);
     //imprimir(conjuntos,g->tamanho);
 
     //adicionar arestas na heap
-    heap = addHeap(g, heap, tamanho);
-    tamanho = getTamanho(heap);
+    heap = addHeap(g, heap, tamanhoHeap);
+    tamanhoHeap = getTamanho(heap);
 
     do {
         u = heap[0]->chave_partida;
@@ -44,9 +44,9 @@ void kruskal(Grafo* g) {
         if (conjuntos[v] != conjuntos[u]) {
             solucao[i] = heap[0];
             tamanhoSolucao++;
-            uniao(conjuntos, u, v, tamanho);
-            tamanho--;
-            heap = deleteHeap(heap, tamanho);
+            uniao(conjuntos, u, v, tamanhoHeap);
+            tamanhoHeap--;
+            heap = deleteHeap(heap, tamanhoHeap);
             //printHeap(heap, tamanho);
             i++; //posição do vetor solução
             //printf("\nConjuntos:");
