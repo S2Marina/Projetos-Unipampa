@@ -20,7 +20,6 @@ Aresta ** buildHeap(Aresta** heap, int tamanho, Aresta* elemento) {
 Aresta ** deleteHeap(Aresta** heap, int tamanho) {
     int x = 0;
     Aresta ** vetor;
-    //tamanho--;
     vetor = (Aresta**) malloc(tamanho * sizeof (Aresta)); //aloco um novo vetor
     heap[0] = NULL;
     vetor = heap;

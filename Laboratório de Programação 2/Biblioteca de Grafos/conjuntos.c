@@ -11,31 +11,45 @@ int* makeSet(int n) {
     return conj;
 }
 
-/*
-int findSet(int i, int* conj) {
+//tentar fazer sem recursividade
+
+/*int findSet(int i, int* conj) {
     if (conj[i] == i) {
         return i;
     } else {
         conj[i] = findSet(conj, conj[i]);
         return conj[i];
     }
-}
-*/
+}*/
 
-int findSet(int i, int* conj){
-    int j = 0;
-    if (conj[i] == i) {
-        return i;
-    } else {
-        j = findSet(conj[i], conj);
-        conj[i] = j;
-        return j;
+
+int findSet(int j, int* conj, int tamanho) {
+    int retorno = 0, rep = 0, x = 0; //representante do conjunto
+    if (conj[j] == j) { //se j é o proprio representante, retorna ele
+        retorno = j;
+    } else { //senão
+        rep = conj[j]; //pego o valor do representante de j
+        for (x = 1; x <= tamanho; x++) {
+            if (conj[x] == rep) {//se essa posicao do vetor conj tem o mesmo representante que j
+                if (x != rep) { //testa se essa coluna é o representante
+                    retorno = rep;
+                }
+            }
+        }
     }
+    return retorno;
 }
- 
 
-int* uniao(int*conj, int i, int j) {
-    conj[i] = findSet(j, conj);
+int* uniao(int*conj, int i, int j, int tamanho) {
+    int x = 0, findJ = 0, conj_i = 0;
+    findJ = findSet(j, conj, tamanho);
+    conj_i = conj[i]; //pega o representante de i
+
+    for (x = 1; x <= tamanho; x++) {//procura todos os valores do conjunto de i e atribui o representante de j a eles tambem
+        if (conj[x] == conj_i) { 
+            conj[x] = findJ;
+        }
+    }
     return conj;
 }
 
