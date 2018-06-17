@@ -14,7 +14,8 @@ void prim(Grafo* g) {
 
     conjuntos = makeSet(tamanhoGrafo);
 
-    nodo = buscaNodo(conjuntos[1], nodo);
+   //infomar nodo de partida
+    nodo = buscaNodo(conjuntos[1], nodo); //busca o primeiro nodo
     while (nodo->adj != NULL) { //adiciona suas arestas na heap
         heap = buildHeap(heap, 1, nodo->adj);
         tamanhoHeap++;
@@ -28,19 +29,19 @@ void prim(Grafo* g) {
         if (conjuntos[v] != conjuntos[u]) {
             solucao[i] = heap[0];
             tamanhoSolucao++;
-            uniao(conjuntos, u, v, tamanhoGrafo);
-            printf("\nConjuntos:\n");
-            imprimir(conjuntos, tamanhoGrafo);
+            uniao(conjuntos, u, v);
+           // printf("\nConjuntos:\n");
+            //imprimir(conjuntos, tamanhoGrafo);
             nodo = buscaNodo(v, nodo);
             tamanhoHeap--;
             heap = deleteHeap(heap, tamanhoHeap);
             while (nodo->adj != NULL) { //adiciona suas arestas na heap
-                printf("%i->%i(%i)\n", nodo->adj->chave_partida, nodo->adj->chave_adj, nodo->adj->peso);
+               // printf("%i->%i(%i)\n", nodo->adj->chave_partida, nodo->adj->chave_adj, nodo->adj->peso);
                 tamanhoHeap++;
                 heap = buildHeap(heap, tamanhoHeap, nodo->adj);
                 nodo->adj = nodo->adj->prox;
             }
-            printHeap(heap, tamanhoHeap);
+            //printHeap(heap, tamanhoHeap);
             i++;
         }
         parar = testeFimP(conjuntos, tamanhoGrafo);
@@ -72,7 +73,7 @@ int testeFimP(int* conj, int tamanho) {
 void printSolucaoP(Aresta** solucao, int tamanho) {
     int x = 0;
     printf("Árvore Geradora Mínima:\n");
-    printf("Solução: ");
+    printf("Solução Prim: ");
     for (x = 0; x < tamanho; x++) {
         printf("%i<%i,%i>  ", solucao[x]->peso, solucao[x]->chave_partida, solucao[x]->chave_adj);
     }

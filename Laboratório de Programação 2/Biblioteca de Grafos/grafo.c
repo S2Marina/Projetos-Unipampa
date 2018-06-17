@@ -84,7 +84,7 @@ Grafo* lerArquivo() {
 
 void imprimirGrafo(Grafo* g) {
     Nodo* nodo = g->listaNodos;
-    printf("%i\n", g->tamanho);
+    printf("Tamanho: %i\n\n", g->tamanho);
     while (nodo != NULL) {
         printf("%i", nodo->chave);
         while (nodo->adj != NULL) {

@@ -29,7 +29,7 @@ void kruskal(Grafo* g) {
     int tamanhoSolucao = 0;
     int tamanhoHeap = 0, u = 0, v = 0, i = 0, parar = 0;
 
-    //cria conjuntos 
+    //cria conjuntos
     conjuntos = makeSet(tamanhoGrafo);
     //imprimir(conjuntos,g->tamanho);
 
@@ -41,16 +41,16 @@ void kruskal(Grafo* g) {
         u = heap[0]->chave_partida;
         v = heap[0]->chave_adj;
 
-        if (conjuntos[v] != conjuntos[u]) {
+        if (findSet(conjuntos[v], conjuntos) != findSet(conjuntos[u], conjuntos)) { //findSet
             solucao[i] = heap[0];
             tamanhoSolucao++;
-            uniao(conjuntos, u, v, tamanhoHeap);
+            uniao(conjuntos, u, v);
             tamanhoHeap--;
             heap = deleteHeap(heap, tamanhoHeap);
-            //printHeap(heap, tamanho);
+            printHeap(heap, tamanhoHeap);
             i++; //posição do vetor solução
-            //printf("\nConjuntos:");
-            //imprimir(conjuntos, tamanhoGrafo);
+            printf("\nConjuntos:");
+            imprimir(conjuntos, tamanhoGrafo);
         }
         parar = testeFim(conjuntos, tamanhoGrafo);
     } while (parar == 0);
@@ -70,7 +70,7 @@ int testeFim(int* conj, int tamanho) {
 void printSolucao(Aresta** solucao, int tamanho){
     int x=0;
     printf("Árvore Geradora Mínima:\n");
-    printf("Solução: ");
+    printf("Solução Kruskal: ");
     for(x=0;x<tamanho;x++){
         printf("%i<%i,%i>  ", solucao[x]->peso, solucao[x]->chave_partida, solucao[x]->chave_adj);
     }
