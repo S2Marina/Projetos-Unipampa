@@ -1,4 +1,4 @@
 void prim(Grafo* g);
-Nodo * buscaNodo(int chave, Nodo* nodo);
-int testeFimP(int* conj, int tamanho);
+Nodo * buscaNodo(int chave, Grafo * g);
 void printSolucaoP(Aresta** solucao, int tamanho);
+int testeSolucao(Aresta* a, int tamanho, Aresta** solucao);

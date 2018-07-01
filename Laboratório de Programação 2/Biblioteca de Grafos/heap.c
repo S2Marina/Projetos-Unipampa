@@ -3,17 +3,23 @@
 #include "grafo.h"
 #include "heap.h"
 
-Aresta ** buildHeap(Aresta** heap, int tamanho, Aresta* elemento) {
+int th = 0; //tamanho heap
+
+Aresta** buildHeap(Aresta** heap, int tamanho, Aresta* elemento) {
     Aresta ** vetor;
     int x = 0;
+    tamanho++;
     vetor = (Aresta**) malloc(tamanho * sizeof (Aresta));
-    if (tamanho != 1) {
+    if (tamanho == 1) {
+        vetor[0] = elemento;  
+    } else {
         for (x = 0; x < tamanho - 1; x++) {
             vetor[x] = heap[x];
         }
+        vetor[tamanho - 1] = elemento;
+        vetor = percolate(vetor, tamanho);
     }
-    vetor[tamanho - 1] = elemento;
-    vetor = percolate(vetor, tamanho);
+    setTamanho(tamanho);
     return vetor;
 }
 
@@ -23,10 +29,12 @@ Aresta ** deleteHeap(Aresta** heap, int tamanho) {
     vetor = (Aresta**) malloc(tamanho * sizeof (Aresta)); //aloco um novo vetor
     heap[0] = NULL;
     vetor = heap;
+    tamanho--;
     for (x = 0; x < tamanho; x++) {
         vetor[x] = heap[x + 1];
     }
     vetor = siftDown(vetor, tamanho);
+    setTamanho(tamanho);
     return vetor;
 }
 
@@ -73,15 +81,10 @@ Aresta* getRaiz(Aresta **heap) {
     return heap[0];
 }
 
-int getTamanho(Aresta **heap) {
-    Aresta** temp = heap;
-    int tamanho = 0;
-    if (heap != NULL) {
-        do {
-            tamanho++;
-        } while (temp[tamanho] != NULL);
-    } else {
-        tamanho = 0;
-    }
-    return tamanho;
+int getTamanho() {
+    return th;
+}
+
+void setTamanho(int novo) {
+    th = novo;
 }

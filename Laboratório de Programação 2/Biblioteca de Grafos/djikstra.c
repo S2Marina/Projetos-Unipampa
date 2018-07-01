@@ -27,7 +27,7 @@ void djikstra(Grafo* g) {
     nodo = filaRetira(vertices);
 
     while (nodo->adj != NULL) { //adiciona as arestas do primeiro nodo na heap
-        heap = buildHeap(heap, 1, nodo->adj);
+//        heap = buildHeap(heap, 1, nodo->adj);
         tamanhoHeap++;
         nodo->adj = nodo->adj->prox;
     }
@@ -47,7 +47,7 @@ void djikstra(Grafo* g) {
             anterior[i + 1] = u;
             nodo = filaRetira(vertices);
             while (nodo->adj != NULL) { //adiciona as arestas do proximo nodo na heap
-                heap = buildHeap(heap, tamanhoHeap, nodo->adj);
+//                heap = buildHeap(heap, tamanhoHeap, nodo->adj);
                 tamanhoHeap++;
                 nodo->adj = nodo->adj->prox;
             }
