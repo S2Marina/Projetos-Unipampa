@@ -26,10 +26,11 @@ void prim(Grafo* g) {
     }
 
     do {
+     
         u = heap[0]->chave_partida; //chave do nodo de partida
         v = heap[0]->chave_adj; //chave do nodo de chegada
         a = heap[0];
-        
+
         printHeap(heap, tamanhoHeap);
 
         teste = testeSolucao(a, tamanhoSolucao, solucao);
@@ -43,29 +44,32 @@ void prim(Grafo* g) {
             printf("\nConjuntos:\n");
             imprimir(conjuntos, tamanhoGrafo);
             nodo = buscaNodo(v, g);
-            while (nodo->adj != NULL) { //adiciona suas arestas na heap
-                printf("%i->%i(%i)\n", nodo->adj->chave_partida, nodo->adj->chave_adj, nodo->adj->peso);
-                heap = buildHeap(heap, tamanhoHeap, nodo->adj);
-                tamanhoHeap = getTamanho();
-                nodo->adj = nodo->adj->prox;
+            if (nodo != NULL) {
+                while (nodo->adj != NULL) { //adiciona suas arestas na heap
+                    printf("%i->%i(%i)\n", nodo->adj->chave_partida, nodo->adj->chave_adj, nodo->adj->peso);
+                    heap = buildHeap(heap, tamanhoHeap, nodo->adj);
+                    tamanhoHeap = getTamanho();
+                    nodo->adj = nodo->adj->prox;
+                }
+                printHeap(heap, tamanhoHeap);
+                i++;
             }
-            printHeap(heap, tamanhoHeap);
-            i++;
+
         }
     } while (tamanhoHeap > 0);
     printSolucaoP(solucao, tamanhoSolucao);
 }
 
 Nodo * buscaNodo(int chave, Grafo* g) {
-    Nodo * nodo = g->listaNodos;
-    while (nodo != NULL) {//encontra o nodo
-        if (nodo->chave == chave) {
-            break;
-        } else {
-            nodo = nodo->prox;
+    Nodo * nodo = g->listaNodos;  
+    while(nodo != NULL){
+        if(nodo->chave == chave){
+            return nodo;
         }
+        nodo = nodo->prox;
+        imprimirGrafo(g);
     }
-    return nodo;
+    return NULL;
 }
 
 int testeSolucao(Aresta* a, int tamanho, Aresta** solucao) {

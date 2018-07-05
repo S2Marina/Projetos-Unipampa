@@ -15,6 +15,7 @@ int main() {
     Aresta* raiz = (Aresta*) malloc(sizeof (Aresta));
     int m = 0, tamanho = 0;
 
+    
     do {
         printf("\nMenu:\n 1-Imprimir grafo\n 2-Kruskal\n 3-Prim\n 4-Djikstra\n 5-DFS\n 6-BFS\n 0-Sair\n\nOpcao: ");
         scanf("%i", &m);
