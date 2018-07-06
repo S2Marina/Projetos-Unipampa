@@ -61,13 +61,13 @@ void prim(Grafo* g) {
 }
 
 Nodo * buscaNodo(int chave, Grafo* g) {
+    g  = lerArquivo();
     Nodo * nodo = g->listaNodos;  
     while(nodo != NULL){
         if(nodo->chave == chave){
             return nodo;
         }
         nodo = nodo->prox;
-        imprimirGrafo(g);
     }
     return NULL;
 }
