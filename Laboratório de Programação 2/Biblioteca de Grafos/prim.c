@@ -6,7 +6,7 @@
 #include "prim.h"
 
 void prim(Grafo* g) {
-    int tamanhoGrafo = g->tamanho, tamanhoHeap = 0, tamanhoSolucao = 0, u = 0, v = 0, i = 0, chave = 0, teste = 0;
+    int tamanhoGrafo = g->tamanho, tamanhoHeap = 0, tamanhoSolucao = 0, u = 0, v = 0, i = 0, chave = 0, teste = 0, print = 0;
     int* conjuntos;
     Aresta** heap = (Aresta**) malloc(sizeof (Aresta));
     Aresta** solucao = (Aresta**) malloc(sizeof (Aresta));
@@ -24,14 +24,15 @@ void prim(Grafo* g) {
         tamanhoHeap = getTamanho();
         nodo->adj = nodo->adj->prox;
     }
-
-    do {
-     
+    if(tamanhoHeap == 0){
+        printf("Nodo sem adjacencias!\n");
+        print++;
+    }
+    
+    while (tamanhoHeap > 0){
         u = heap[0]->chave_partida; //chave do nodo de partida
         v = heap[0]->chave_adj; //chave do nodo de chegada
         a = heap[0];
-
-        printHeap(heap, tamanhoHeap);
 
         teste = testeSolucao(a, tamanhoSolucao, solucao);
         heap = deleteHeap(heap, tamanhoHeap);
@@ -46,18 +47,19 @@ void prim(Grafo* g) {
             nodo = buscaNodo(v, g);
             if (nodo != NULL) {
                 while (nodo->adj != NULL) { //adiciona suas arestas na heap
-                    printf("%i->%i(%i)\n", nodo->adj->chave_partida, nodo->adj->chave_adj, nodo->adj->peso);
                     heap = buildHeap(heap, tamanhoHeap, nodo->adj);
                     tamanhoHeap = getTamanho();
                     nodo->adj = nodo->adj->prox;
                 }
-                printHeap(heap, tamanhoHeap);
                 i++;
             }
-
         }
-    } while (tamanhoHeap > 0);
-    printSolucaoP(solucao, tamanhoSolucao);
+        printHeap(heap, tamanhoHeap);
+    } 
+    
+    if(print == 0){
+        printSolucaoP(solucao, tamanhoSolucao);
+    }
 }
 
 Nodo * buscaNodo(int chave, Grafo* g) {
@@ -84,7 +86,7 @@ int testeSolucao(Aresta* a, int tamanho, Aresta** solucao) {
 
 void printSolucaoP(Aresta** solucao, int tamanho) {
     int x = 0;
-    printf("Árvore Geradora Mínima:\n");
+    printf("\nÁrvore Geradora Mínima:\n");
     printf("Solução Prim: ");
     for (x = 0; x < tamanho; x++) {
         printf("%i<%i,%i>  ", solucao[x]->peso, solucao[x]->chave_partida, solucao[x]->chave_adj);
