@@ -30,24 +30,22 @@ void kruskal(Grafo* g) {
 
     //cria conjuntos
     makeSet(tamanhoGrafo, conjuntos);
-    //imprimir(conjuntos,g->tamanho);
 
     //adicionar arestas na heap
     heap = addHeap(g, heap, tamanhoHeap);
     tamanhoHeap = getTamanho();
-    printf("COMECO\n");
     printHeap(heap, tamanhoHeap);
-    
+
     do {
         u = findSet(heap[0]->chave_partida, conjuntos);
         v = findSet(heap[0]->chave_adj, conjuntos);
         a = heap[0];
-        
+
         heap = deleteHeap(heap, tamanhoHeap);
         tamanhoHeap = getTamanho();
         printHeap(heap, tamanhoHeap);
 
-        if (findSet(conjuntos[v-1], conjuntos) != findSet(conjuntos[u-1], conjuntos)) { //findSet 
+        if (findSet(conjuntos[v-1], conjuntos) != findSet(conjuntos[u-1], conjuntos)) { //findSet
             solucao[i] = a;
             tamanhoSolucao++;
             uniao(conjuntos, u, v);
